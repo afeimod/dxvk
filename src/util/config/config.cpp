@@ -371,7 +371,11 @@ namespace dxvk {
       { "dxvk.maxChunkSize",                "1"   },
     }} },
     /* Origin app (legacy EA Desktop)             */
-    { R"(\\Origin\.exe$)", {{
+    { R"(\\Origin\\(Origin|OriginWebHelperService)\.exe$)", {{
+      { "dxvk.maxChunkSize",                "1"   },
+    }} },
+    /* Ubisoft Connect (UPlay)                    */
+    { R"(\\Ubisoft\\Ubisoft Game Launcher\\(UbisoftConnect|upc)\.exe$)", {{
       { "dxvk.maxChunkSize",                "1"   },
     }} },
     /* GOG Galaxy                                 */
@@ -438,6 +442,21 @@ namespace dxvk {
     { R"(\\Gw2-64\.exe$)", {{
       { "d3d11.longMad",                  "True"    },
     }} },
+    /* Ghostbusters: The Video Game Remastered    *
+     * Flickering on character faces              */
+    { R"(\\ghost\.exe$)", {{
+      { "d3d11.longMad",                  "True"    },
+    }} },
+    /* Watch_Dogs - Some objects flicker without  */
+    { R"(\\watch_dogs\.exe$)", {{
+      { "d3d11.longMad",                  "True"    },
+    }} },
+    /* Crysis 1/Warhead - Game bug in d3d10 makes *
+     * it select lowest supported refresh rate    */
+    { R"(\\Crysis(64)?\.exe$)", {{
+      { "d3d9.maxFrameRate",              "-1"      },
+      { "dxgi.maxFrameRate",              "-1"      },
+    }} },
 
     /**********************************************/
     /* D3D9 GAMES                                 */
@@ -490,6 +509,14 @@ namespace dxvk {
        Built-in Vsync Locks the game to 30 FPS    */
     { R"(\\Dead Space\.exe$)", {{
       { "d3d9.supportDFFormats",                 "False" },
+      { "d3d9.maxFrameRate",                     "60" },
+      { "d3d9.presentInterval",                  "1" },
+    }} },
+    /* Dead Space 2
+       Physics issues above 60 FPS
+       Built-in Vsync Locks the game to 30 FPS
+    */
+    { R"(\\deadspace2\.exe$)", {{
       { "d3d9.maxFrameRate",                     "60" },
       { "d3d9.presentInterval",                  "1" },
     }} },
@@ -906,6 +933,31 @@ namespace dxvk {
      * Incorrect shadows on AMD & Intel          */
     { R"(\\prototypef\.exe$)", {{ 
       { "d3d9.supportDFFormats",            "False" },
+    }} },
+    /* STAR WARS: The Force Unleashed            *
+     * Prevents black screen on each alt-tab     */
+    { R"(\\SWTFU\.exe$)", {{ 
+      { "d3d9.deviceLossOnFocusLoss",       "True" },
+    }} },
+    /* Fallout New Vegas - Various visual issues *
+     * with mods such as New Vegas Reloaded      */
+    { R"(\\FalloutNV\.exe$)", {{ 
+      { "d3d9.floatEmulation",              "Strict" },
+    }} },
+    /* Dungeons and Dragons: Dragonshard         *
+     * Massive FPS decreases in some scenes      */
+    { R"(\\Dragonshard\.exe$)", {{ 
+      { "d3d9.cachedDynamicBuffers",        "True" },
+    }} },
+    /* Guild Wars 1 - Alt-tab black screen when  *
+     * fullscreen with non native resolution     */
+    { R"(\\Gw\.exe$)", {{ 
+      { "d3d9.deviceLossOnFocusLoss",       "True" },
+    }} },
+    /* Battle for Middle-earth 2 and expansion   *
+     * Slowdowns in certain scenarios            */
+    { R"(\\(The Battle for Middle-earth (\(tm\))? II( Demo)?|The Lord of the Rings, The Rise of the Witch-king)\\game\.dat$)", {{
+      { "d3d9.cachedDynamicBuffers",        "True" },
     }} },
 
 
