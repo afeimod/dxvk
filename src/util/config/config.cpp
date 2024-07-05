@@ -447,8 +447,8 @@ namespace dxvk {
     { R"(\\ghost\.exe$)", {{
       { "d3d11.longMad",                  "True"    },
     }} },
-    /* Watch_Dogs - Some objects flicker without  */
-    { R"(\\watch_dogs\.exe$)", {{
+    /* Watch_Dogs series - Some objects flicker  */
+    { R"(\\watch(_)?dogs(2|Legion)?\.exe$)", {{
       { "d3d11.longMad",                  "True"    },
     }} },
     /* Crysis 1/Warhead - Game bug in d3d10 makes *
@@ -554,10 +554,6 @@ namespace dxvk {
     /* Senran Kagura Shinovi Versus               */
     { R"(\\SKShinoviVersus\.exe$)", {{
       { "d3d9.forceAspectRatio",            "16:9" },
-    }} },
-    /* Metal Slug X                               */
-    { R"(\\mslugx\.exe$)", {{
-      { "d3d9.supportD32",                  "False" },
     }} },
     /* Skyrim (NVAPI)                             */
     { R"(\\TESV\.exe$)", {{
@@ -714,12 +710,14 @@ namespace dxvk {
       { "d3d9.memoryTrackTest",             "True" },
       { "d3d9.maxAvailableMemory",          "2048" },
     }} },
-    /* Myst V End of Ages
-       Game has white textures on amd radv.
-       Expects Nvidia, Intel or ATI VendorId.
-       "Radeon" in gpu description also works   */
+    /* Myst V End of Ages                       *
+     * White textures unless it sees Nvidia,    *
+     * Intel or ATI VendorId.                   *
+     * "Radeon" in gpu description also works.  *
+     * countLosable for resolution change crash.*/
     { R"(\\eoa\.exe$)", {{
       { "d3d9.customVendorId",              "10de" },
+      { "d3d9.countLosableResources",       "False" },
     }} },
     /* Supreme Commander & Forged Alliance Forever */
     { R"(\\(SupremeCommander|ForgedAlliance)\.exe$)", {{
@@ -958,6 +956,10 @@ namespace dxvk {
      * Slowdowns in certain scenarios            */
     { R"(\\(The Battle for Middle-earth (\(tm\))? II( Demo)?|The Lord of the Rings, The Rise of the Witch-king)\\game\.dat$)", {{
       { "d3d9.cachedDynamicBuffers",        "True" },
+    }} },
+    /* WRC4 - Audio breaks above 60fps */
+    { R"(\\WRC4\.exe$)", {{
+      { "d3d9.maxFrameRate",                "60" },
     }} },
 
 
